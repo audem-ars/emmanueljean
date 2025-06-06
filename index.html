@@ -6,10 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EmmanuelJean - Luxury Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Firebase SDKs -->
+<script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    import { getAuth } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+  
+    const firebaseConfig = {
+      apiKey: "AIzaSyDmW-tGvwHwG7ziugvef8Vp5dqWtC_tVq0",
+      authDomain: "emmanueljean-e9461.firebaseapp.com",
+      projectId: "emmanueljean-e9461",
+      storageBucket: "emmanueljean-e9461.firebasestorage.app",
+      messagingSenderId: "693485847114",
+      appId: "1:693485847114:web:ed4b6fe5a1fc75445e9cb3",
+      measurementId: "G-ZK66J4Q7N7"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+    
+    // Make available globally
+    window.firebase = { db, auth };
+  </script>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/modal-fix.css">
+    <link rel="stylesheet" href="css/gallery.css">
 </head>
 <body>
     <div class="ambient-background"></div>
@@ -24,12 +49,8 @@
         <!-- Dynamic content loaded here -->
     </main>
 
-    <!-- Footer Component -->
-    <footer id="main-footer">
-        <!-- Will be loaded by footer.js -->
-    </footer>
-
-    <!-- Contact Modal - This was missing! -->
+    <!-- MODALS MOVED HERE - BEFORE FOOTER -->
+    <!-- Contact Modal -->
     <div id="contact-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -98,7 +119,7 @@
         </div>
     </div>
 
-    <!-- Additional Modals for Privacy/Terms -->
+    <!-- Privacy Modal -->
     <div id="privacy-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -117,6 +138,7 @@
         </div>
     </div>
 
+    <!-- Terms Modal -->
     <div id="terms-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -135,7 +157,265 @@
         </div>
     </div>
 
+    <!-- Join Network Modal -->
+    <div id="join-network-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Join Our Exclusive Network</h2>
+                <button class="close-modal" onclick="app.closeModal('join-network-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🌟</div>
+                    <p style="color: var(--luxury-gold); font-size: 1.1rem; margin-bottom: 20px;">Welcome to the world's most exclusive luxury network</p>
+                </div>
+                
+                <form id="join-network-form">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" name="name" required placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" name="email" required placeholder="your.email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phone" placeholder="+1 (555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label>Primary Interest</label>
+                        <select name="interest">
+                            <option value="">Select Your Focus</option>
+                            <option value="diamonds">💎 Premium Diamonds & Gemstones</option>
+                            <option value="cars">🏎️ Luxury & Exotic Automobiles</option>
+                            <option value="commodities">🥇 Precious Metals & Commodities</option>
+                            <option value="technology">⚡ Advanced Technology Investments</option>
+                            <option value="properties">🏰 Elite Real Estate Portfolio</option>
+                            <option value="all">All Categories</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Investment Range</label>
+                        <select name="budget">
+                            <option value="">Select Investment Range</option>
+                            <option value="500k-1m">$500K - $1M</option>
+                            <option value="1m-5m">$1M - $5M</option>
+                            <option value="5m-10m">$5M - $10M</option>
+                            <option value="10m-25m">$10M - $25M</option>
+                            <option value="25m+">$25M+</option>
+                            <option value="undisclosed">Prefer not to disclose</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <select name="location">
+                            <option value="">Select Your Location</option>
+                            <option value="north-america">🇺🇸 North America</option>
+                            <option value="europe">🇪🇺 Europe</option>
+                            <option value="middle-east">🕌 Middle East</option>
+                            <option value="asia-pacific">🌏 Asia Pacific</option>
+                            <option value="other">🌍 Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tell Us About Yourself</label>
+                        <textarea name="message" rows="3" placeholder="Brief description of your luxury investment goals and interests..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Join Exclusive Network</button>
+                </form>
+                
+                <div class="form-footer" style="background: rgba(212, 175, 55, 0.05); border-radius: 12px; padding: 20px; margin-top: 25px;">
+                    <p style="margin: 8px 0; font-size: 0.9rem; color: var(--luxury-gold);">🔒 Your information is completely confidential</p>
+                    <p style="margin: 8px 0; font-size: 0.9rem; color: var(--luxury-gold);">✨ Membership is by invitation and qualification only</p>
+                    <p style="margin: 8px 0; font-size: 0.9rem; color: var(--luxury-gold);">📞 Our team will contact you within 24 hours</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+<div id="login-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Login to EmmanuelJean</h2>
+            <button class="close-modal" onclick="app.closeModal('login-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" name="email" required placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" name="password" required placeholder="Your password">
+                </div>
+                <button type="submit" class="form-submit">Login</button>
+                <button type="button" class="form-submit" onclick="app.loginWithGoogle()" style="background: #4285f4; margin-top: 10px;">Login with Google</button>
+                <p style="text-align: center; margin-top: 15px; color: var(--light-gray);">
+                    <a href="#" onclick="app.openModal('forgot-password-modal'); app.closeModal('login-modal');" style="color: var(--luxury-gold); text-decoration: none;">Forgot Password?</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Signup Modal -->
+<div id="signup-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Join EmmanuelJean</h2>
+            <button class="close-modal" onclick="app.closeModal('signup-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="signup-form">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" name="name" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" name="email" required placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" name="password" required placeholder="Choose a password" minlength="6">
+                </div>
+                <button type="submit" class="form-submit">Create Account</button>
+                <button type="button" class="form-submit" onclick="app.signupWithGoogle()" style="background: #4285f4; margin-top: 10px;">Sign Up with Google</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div id="forgot-password-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Reset Password</h2>
+            <button class="close-modal" onclick="app.closeModal('forgot-password-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="forgot-password-form">
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" name="email" required placeholder="Enter your email address">
+                </div>
+                <button type="submit" class="form-submit">Send Reset Email</button>
+                <p style="text-align: center; margin-top: 15px; color: var(--light-gray);">
+                    Remember your password? <a href="#" onclick="app.openModal('login-modal'); app.closeModal('forgot-password-modal');" style="color: var(--luxury-gold);">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <!-- Add/Edit Item Modal -->
+<div id="item-form-modal" class="modal">
+    <div class="modal-content" style="max-width: 1000px; width: 95%; max-height: 90vh; overflow-y: auto;">
+        <div class="modal-header">
+            <h2 class="modal-title" id="item-form-title">Add New Item</h2>
+            <button class="close-modal" onclick="app.closeModal('item-form-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="item-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <!-- Left Side - Form & Images -->
+                    <div>
+                        <div class="form-group">
+                            <label>Item Name *</label>
+                            <input type="text" name="title" required placeholder="Enter item name">
+                        </div>
+                        <div class="form-group">
+                            <label>Price *</label>
+                            <input type="text" name="price" required placeholder="$0">
+                        </div>
+                        
+                        <!-- Image Upload Section -->
+                        <div class="form-group">
+                            <label>Images/Videos</label>
+                            <div style="border: 2px dashed rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 20px; text-align: center; background: rgba(26, 26, 26, 0.5);">
+                                <input type="file" id="modal-file-input" accept="image/*,video/*" multiple style="display: none;">
+                                <button type="button" onclick="document.getElementById('modal-file-input').click()" style="background: var(--luxury-gold); color: #000; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-bottom: 10px;">
+                                    📁 Upload Media
+                                </button>
+                                <p style="color: var(--light-gray); font-size: 0.9rem;">Upload up to 20 images/videos</p>
+                                <div id="uploaded-media-preview" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; margin-top: 15px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Description Format</label>
+                            <select name="format" id="description-format" onchange="app.updateDescriptionPreview()">
+                                <option value="paragraph">📄 Paragraph</option>
+                                <option value="single">📋 Specs List</option>
+                                <option value="features-specs">📊 Features & Specs (use --- to separate)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="form-submit">Save Item</button>
+                    </div>
+                    
+                    <!-- Right Side - Description & Preview -->
+                    <div>
+                        <div class="form-group">
+                            <label>Description *</label>
+                            <textarea name="description" rows="12" required placeholder="Enter description..." onkeyup="app.updateDescriptionPreview()" onchange="app.updateDescriptionPreview()"></textarea>
+                        </div>
+                        
+                        <h4 style="color: var(--luxury-gold); margin-bottom: 15px;">📋 Live Preview:</h4>
+                        <div id="description-preview" style="
+                            background: var(--card-color); 
+                            border: 1px solid rgba(255,255,255,0.1); 
+                            border-radius: 8px; 
+                            padding: 20px; 
+                            min-height: 200px;
+                            color: var(--light-gray);
+                            line-height: 1.5;
+                            max-height: 300px;
+                            overflow-y: auto;
+                        ">
+                            Type description to see preview...
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer Component -->
+    <footer id="main-footer">
+        <!-- Will be loaded by footer.js -->
+    </footer>
+
     <!-- Scripts -->
+    <script src="js/cloudinary.js"></script>
     <script src="js/main.js"></script>
+
+    <style>
+    /* Additional styles for Join Network Modal */
+    #join-network-modal .modal-title {
+        background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--diamond-silver) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    }
+
+    #join-network-modal .form-submit {
+        background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--warm-bronze) 100%);
+        color: #000;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+    }
+
+    #join-network-modal .form-submit:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+    }
+    </style>
 </body>
 </html>

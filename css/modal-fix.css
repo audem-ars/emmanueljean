@@ -1,325 +1,252 @@
 /* Modal Positioning Fix */
 .modal {
-    display: none;
-    position: fixed !important; /* Force fixed positioning */
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    z-index: 10000 !important; /* Very high z-index */
-    align-items: center;
-    justify-content: center;
-    overflow-y: auto; /* Allow scrolling if content is too tall */
-  }
-  
-  .modal.active {
-    display: flex !important;
-  }
-  
+  display: none;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 10000 !important;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.modal.active {
+  display: flex !important;
+}
+
+.modal-content {
+  background: var(--card-color);
+  padding: 40px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  margin: auto;
+}
+
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  position: sticky;
+  top: 0;
+  background: var(--card-color);
+  z-index: 1;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--cream-panel);
+  text-shadow: 0 0 10px rgba(166, 157, 135, 0.3);
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  color: var(--luxury-gold);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.close-modal:hover {
+  color: var(--diamond-silver);
+  background: rgba(212, 175, 55, 0.1);
+  transform: scale(1.15);
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.modal-body {
+  max-height: calc(90vh - 120px);
+  overflow-y: auto;
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Enhanced form styles for better UX */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--light-gray);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  background: var(--dark-gray);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--luxury-gold);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+  background: rgba(26, 26, 26, 0.8);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(184, 184, 184, 0.6);
+}
+
+.form-submit {
+  width: 100%;
+  background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--warm-bronze) 100%);
+  color: #000;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.form-submit:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+.form-submit:active {
+  transform: translateY(0) scale(1);
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--light-gray);
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.form-footer p {
+  margin: 5px 0;
+}
+
+/* INVISIBLE SCROLLBARS */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox - INVISIBLE */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Modal scrollbars - INVISIBLE */
+.modal-content::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Mobile responsive modal */
+@media (max-width: 768px) {
   .modal-content {
-    background: var(--card-color);
-    padding: 40px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 500px;
-    max-height: 90vh; /* Prevent modal from being too tall */
-    overflow-y: auto; /* Allow scrolling within modal if needed */
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    position: relative;
-    margin: auto; /* Center the modal content */
-  }
-  
-  .modal.active .modal-content {
-    transform: scale(1);
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    position: sticky;
-    top: 0;
-    background: var(--card-color);
-    z-index: 1;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 95%;
+    max-width: none;
+    padding: 30px 20px;
+    margin: 20px auto;
+    max-height: calc(100vh - 40px);
   }
   
   .modal-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: var(--luxury-gold);
+    font-size: 1.6rem;
   }
   
   .close-modal {
-    background: none;
-    border: none;
-    color: var(--luxury-gold);
-    font-size: 2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    line-height: 1;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-  }
-  
-  .close-modal:hover {
-    color: var(--diamond-silver);
-    background: rgba(212, 175, 55, 0.1);
-    transform: scale(1.15);
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-  }
-  
-  .modal-body {
-    max-height: calc(90vh - 120px); /* Account for header and padding */
-    overflow-y: auto;
-  }
-  
-  /* Prevent body scroll when modal is open */
-  body.modal-open {
-    overflow: hidden;
-    height: 100vh;
-  }
-  
-  /* Enhanced form styles for better UX */
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--light-gray);
-    font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 1.8rem;
+    width: 35px;
+    height: 35px;
   }
   
   .form-group input,
   .form-group select,
   .form-group textarea {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--medium-gray);
-    border-radius: 8px;
-    background: var(--dark-gray);
-    color: var(--text-color);
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--luxury-gold);
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
-    background: rgba(26, 26, 26, 0.8);
-  }
-  
-  .form-group input::placeholder,
-  .form-group textarea::placeholder {
-    color: rgba(184, 184, 184, 0.6);
+    padding: 10px 14px;
+    font-size: 0.95rem;
   }
   
   .form-submit {
-    width: 100%;
-    background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--warm-bronze) 100%);
-    color: #000;
-    padding: 14px 24px;
-    border: none;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 98%;
+    padding: 25px 15px;
+    margin: 10px auto;
   }
   
-  .form-submit:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+  .modal-title {
+    font-size: 1.4rem;
   }
-  
-  .form-submit:active {
-    transform: translateY(0) scale(1);
-  }
-  
-  .form-footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: var(--light-gray);
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  
-  .form-footer p {
-    margin: 5px 0;
-  }
-  
-  /* Mobile responsive modal */
-  @media (max-width: 768px) {
-    .modal-content {
-      width: 95%;
-      max-width: none;
-      padding: 30px 20px;
-      margin: 20px auto;
-      max-height: calc(100vh - 40px);
-    }
-    
-    .modal-title {
-      font-size: 1.6rem;
-    }
-    
-    .close-modal {
-      font-size: 1.8rem;
-      width: 35px;
-      height: 35px;
-    }
-    
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      padding: 10px 14px;
-      font-size: 0.95rem;
-    }
-    
-    .form-submit {
-      padding: 12px 20px;
-      font-size: 1rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .modal-content {
-      width: 98%;
-      padding: 25px 15px;
-      margin: 10px auto;
-    }
-    
-    .modal-title {
-      font-size: 1.4rem;
-    }
-  }
-  
-  /* Custom Scrollbar Styling - Luxury Theme */
-  /* Webkit browsers (Chrome, Safari, Edge) */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: rgba(21, 21, 21, 0.4);
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, 
-      rgba(212, 175, 55, 0.6) 0%, 
-      rgba(139, 111, 71, 0.4) 50%,
-      rgba(212, 175, 55, 0.6) 100%);
-    border-radius: 10px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    box-shadow: 
-      0 0 6px rgba(212, 175, 55, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, 
-      rgba(212, 175, 55, 0.8) 0%, 
-      rgba(139, 111, 71, 0.6) 50%,
-      rgba(212, 175, 55, 0.8) 100%);
-    box-shadow: 
-      0 0 12px rgba(212, 175, 55, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  }
-  
-  ::-webkit-scrollbar-thumb:active {
-    background: linear-gradient(180deg, 
-      rgba(212, 175, 55, 0.9) 0%, 
-      rgba(139, 111, 71, 0.7) 50%,
-      rgba(212, 175, 55, 0.9) 100%);
-  }
-  
-  ::-webkit-scrollbar-corner {
-    background: rgba(21, 21, 21, 0.4);
-  }
-  
-  /* Firefox scrollbar styling */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(212, 175, 55, 0.6) rgba(21, 21, 21, 0.4);
-  }
-  
-  /* Alternative: Completely hide scrollbars but keep functionality */
-  /* Uncomment these lines if you prefer invisible scrollbars */
-  
-  ::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
-    background: transparent;
-  }
-  
-  * {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  */
-  
-  /* Modal specific scrollbar styling */
-  .modal-content::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  .modal-content::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, 
-      rgba(212, 175, 55, 0.7) 0%, 
-      rgba(201, 214, 255, 0.3) 50%,
-      rgba(212, 175, 55, 0.7) 100%);
-    border-radius: 6px;
-    box-shadow: 
-      0 0 8px rgba(212, 175, 55, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  }
-  
-  .modal-body::-webkit-scrollbar {
-    width: 4px;
-  }
-  
-  .modal-body::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.5);
-    border-radius: 4px;
-    box-shadow: 0 0 4px rgba(212, 175, 55, 0.3);
-  }
-  
-  /* Body scrollbar when modal is closed */
-  body::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, 
-      rgba(212, 175, 55, 0.4) 0%, 
-      rgba(139, 111, 71, 0.2) 50%,
-      rgba(212, 175, 55, 0.4) 100%);
-  }
-  
-  /* Smooth scrolling enhancement */
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  .modal-content,
-  .modal-body {
-    scroll-behavior: smooth;
-  }
+}

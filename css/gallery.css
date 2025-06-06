@@ -1,0 +1,6 @@
+/* CLEAN - NO BROKEN SHIT */
+.btn-gallery {
+  background: rgba(139, 111, 71, 0.2);
+  color: var(--warm-bronze);
+  border: 1px solid var(--warm-bronze);
+}
