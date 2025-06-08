@@ -1288,30 +1288,6 @@ async resetPassword(email) {
         this.showNotification(`Reset failed: ${error.message}`, 'error');
     }
 }
-async resetPassword(email) {
-    try {
-        const { sendPasswordResetEmail } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
-        await sendPasswordResetEmail(window.firebase.auth, email);
-        this.showNotification('Password reset email sent! Check your inbox.', 'success');
-        this.closeModal('forgot-password-modal');
-    } catch (error) {
-        this.showNotification(`Reset failed: ${error.message}`, 'error');
-    }
-}
-
-toggleMobileAuth() {
-    const authSlide = document.getElementById('mobileAuthSlide');
-    authSlide.classList.toggle('show');
-}
-
-showMobileAuth() {
-    document.getElementById('mobileAuthSlide').classList.add('show');
-}
-
-hideMobileAuth() {
-    document.getElementById('mobileAuthSlide').classList.remove('show');
-}
-
 togglePortfolioNav() {
     const nav = document.getElementById('mainNav');
     const toggle = document.getElementById('portfolioToggle');
