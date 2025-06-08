@@ -40,6 +40,59 @@
 }
 
 @media (max-width: 768px) {
+  /* Stack logo vertically to save space */
+  .logo {
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+  }
+  
+  .logo .jean {
+    margin-left: 0;
+    margin-top: -5px;
+  }
+  
+  /* Hide portfolio toggle on mobile - use hamburger instead */
+  .portfolio-toggle {
+    display: none !important;
+  }
+  
+  /* Show main nav in hamburger on mobile */
+  .main-nav {
+    position: fixed;
+    top: 80px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 50px;
+    gap: 30px;
+    transition: left 0.3s ease;
+    z-index: 99;
+  }
+
+  .main-nav.active {
+    left: 0;
+  }
+  
+  /* Make hamburger menu positioned better */
+  .mobile-menu-btn {
+    margin-left: 0;
+    margin-right: 15px;
+    margin-top: 0;
+    position: relative;
+    z-index: 1001;
+  }
+  
+  /* Fix header height and spacing */
+  header {
+    padding: 0 15px;
+    height: 70px;
+    gap: 10px;
+  }
   .mobile-menu-btn {
     display: flex;
   }
