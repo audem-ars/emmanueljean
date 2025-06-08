@@ -100,9 +100,13 @@
     z-index: 1001;
   }
   
-  /* Hide auth buttons on mobile */
   .auth-buttons {
-    display: none !important;
+    display: flex !important;
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 10px;
   }
   
   /* Portfolio dropdown positioning */
