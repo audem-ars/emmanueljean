@@ -40,11 +40,22 @@
 }
 
 @media (max-width: 768px) {
+  /* Fix header layout to prevent overlapping */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    height: 70px;
+    gap: 10px;
+  }
+  
   /* Stack logo vertically to save space */
   .logo {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     line-height: 1;
+    flex-shrink: 0;
   }
   
   .logo .jean {
@@ -52,71 +63,69 @@
     margin-top: -5px;
   }
   
-  /* Hide portfolio toggle on mobile - use hamburger instead */
-  .portfolio-toggle {
-    display: none !important;
-  }
-  
-  /* Show main nav in hamburger on mobile */
-  .main-nav {
-    position: fixed;
-    top: 80px;
-    left: -100%;
-    width: 100%;
-    height: calc(100vh - 80px);
-    background: rgba(10, 10, 10, 0.98);
-    backdrop-filter: blur(20px);
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 50px;
-    gap: 30px;
-    transition: left 0.3s ease;
-    z-index: 99;
+  .logo .emmanuel {
+    font-size: 1.6rem;
   }
 
-  .main-nav.active {
-    left: 0;
+  .logo .jean {
+    font-size: 1.8rem;
   }
   
-  /* Make hamburger menu positioned better */
+  /* Position nav container in center with space */
+  .nav-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 10px;
+  }
+  
+  /* Style portfolio toggle */
+  .portfolio-toggle {
+    background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--warm-bronze) 100%);
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  /* Show hamburger menu */
   .mobile-menu-btn {
+    display: flex;
     margin-left: 0;
-    margin-right: 15px;
-    margin-top: 0;
-    position: relative;
+    margin-right: 0;
+    flex-shrink: 0;
     z-index: 1001;
   }
   
-  /* Fix header height and spacing */
-  header {
-    padding: 0 15px;
-    height: 70px;
-    gap: 10px;
+  /* Hide auth buttons on mobile */
+  .auth-buttons {
+    display: none !important;
   }
-  .mobile-menu-btn {
-    display: flex;
-  }
-
+  
+  /* Portfolio dropdown positioning */
   .main-nav {
-    position: fixed;
-    top: 80px;
-    left: -100%;
-    width: 100%;
-    height: calc(100vh - 80px);
-    background: rgba(10, 10, 10, 0.98);
-    backdrop-filter: blur(20px);
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card-color);
+    border: 1px solid var(--luxury-gold);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 50px;
-    gap: 30px;
-    transition: left 0.3s ease;
-    z-index: 99;
+    gap: 8px;
+    min-width: 180px;
+    z-index: 999;
   }
 
-  .main-nav.active {
-    left: 0;
+  .main-nav.collapsed {
+    display: none;
   }
-
+  
   .nav-link {
     font-size: 1.2rem;
     padding: 15px 30px;
@@ -124,19 +133,6 @@
     text-align: center;
     border-radius: 12px;
     margin: 0 auto;
-  }
-
-  header {
-    padding: 0 24px;
-    height: 70px;
-  }
-
-  .logo .emmanuel {
-    font-size: 1.6rem;
-  }
-
-  .logo .jean {
-    font-size: 1.8rem;
   }
 
   .hero {
@@ -214,8 +210,6 @@
     grid-template-columns: 1fr;
     gap: 24px;
   }
-
-  /* REMOVED CONFLICTING .item-image STYLES */
 
   .item-content {
     padding: 20px;
